@@ -1,0 +1,22 @@
+service: xelphi
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  memorySize: 2048
+  stage: dev
+  timeout: 15
+  region: us-east-1
+  lambdaHashingVersion: 20201221
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http: ANY /{proxy+}
+      - http: ANY /
+    environment:
+      ACCESS_TOKEN_SECRET: fa7d2f5cfce6c14f98f5dcd5546f477434f3457f788dd41a757da5df02245be74a711c01017a32ea3036be23397fd3db93718737658f279651b1501d30dd5e14
+      REFRESH_TOKEN_SECRET: d1a42ec4348a1362d875e9314c38185e608289004d3a64e91523ed2f0515969f61345ca795dc34b3d5d978aa445f079d49f84ad1db36e075c53062cb83d14840
+      DB_CONNECTION: mongodb+srv://dev:caleb0307@cluster0.ci0z8.mongodb.net/?retryWrites=true&w=majority
